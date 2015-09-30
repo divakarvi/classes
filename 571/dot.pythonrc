@@ -1,0 +1,75 @@
+import os
+import sys
+import imp
+import math
+import numpy as np
+import scipy as sp
+import matplotlib as mpl
+print('list of interactive mpl backends: \n'\
+          +'\n'.join(mpl.rcsetup.interactive_bk))
+mpl.use('TkAgg', warn=True)
+mpl.rcParams['interactive'] = True
+import matplotlib.pyplot as plt
+print('matplotlib backend: ',mpl.get_backend())
+
+def reprompt():
+    sys.ps1 = (os.getcwd()+': ').replace(os.getenv('HOME'),'~')
+
+reprompt()
+
+def grep(s,obj):
+    """
+    grep(s,obj):
+    s = string	
+    obj = any python object
+    walk through dir(obj) and print all entries which contain s
+    useful for inspecting dir
+    """
+    l = dir(obj)
+    
+    for x in l:
+        if x.find(s) != -1:
+            print(x)
+
+def doc(obj):
+    """
+    doc(obj): print doc of any python object
+    """
+    if(obj.__doc__ != None):
+        print(obj.__doc__)
+
+def docc(obj):
+    """
+    docc(obj): print doc of any python object as well as dir()
+    """
+    if(obj.__doc__ != None):
+        print('\t\tdoc string of module:\n')
+        print(obj.__doc__)
+    print('\t\t objs inside  module:\n')
+    print('\n'.join(dir(obj)))
+
+def doccc(obj, filter=None):
+    """
+    docc(obj): print doc of any python object as well as dir()
+               as well as doc() of all functions/modules in dir()
+    """
+    if(obj.__doc__ != None):
+        print('\t\tdoc string of module:\n')
+        print(obj.__doc__)
+    import inspect
+    for (name, val) in inspect.getmembers(obj):
+        if inspect.isfunction(val) or inspect.ismodule(val):
+            if val.__doc__ == None:
+                continue
+            if filter != None and name.find(filter) == -1:
+                continue
+            print('\n****************')
+            print(name)
+            print('****************')
+            print(val.__doc__)
+
+print('1. loaded os sys imp math np sp mpl plt')
+print('2. reprompt() to update prompt after os.chdir()')
+print("3. grep(obj, s), doc(obj), docc(mod), doccc('mod') defined")
+print('4. mpl backend is:' + mpl.rcParams['backend'])
+print('5. mpl backend set to be interactive')

@@ -1,0 +1,15 @@
+1. Downloading anaconda3
+2. Installing python 3 in /usr/local/
+3. setting up .pythonrc
+4. strings, indexing, methods to operate on strings
+5. range operator
+6. if statement 
+7. function definition
+8. returning tuples
+9. keyword arguments
+10. default arguments
+11. dictionaries
+12. file i/o
+13. very good of system activities
+14. almost everything, except str, int, float, are passed as pointers
+15. plotting using matplotlib
