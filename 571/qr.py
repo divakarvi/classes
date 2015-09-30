@@ -60,6 +60,8 @@ def mgsvscgs(n):
     plt.semilogy(abs(np.diag(Rc)),'ro', ms = 5.0)
     plt.semilogy(abs(np.diag(Rm)),'bo', ms = 5.0)
     plt.semilogy(abs(np.diag(R)),'go', ms = 5.0)
+    plt.ylabel('magnitude of R(i,i)')
+    plt.xlabel('i')
     plt.legend(['classical', 'modified', 'numpy'])
     plt.show()
 
@@ -77,13 +79,16 @@ def time(n):
     tp = time.time() - tic
     return tc, tm, tp
 
-def time_plot(n, cpughz = 3.3):
-    nlist = list(range(200, n, 100))
+def time_plot(ni, dn, n, cpughz):
+    nlist = list(range(ni, n, dn))
     cycles = np.zeros((len(nlist), 3))
     for i, n in enumerate(nlist):
         tc, tm, tp = time(n)
-        cycles[i, :] = np.array([tc, tm, tp])*cpughz*1e9/n/n/n
-    print(cycles[-1,:])
+        cycles[i, :] = np.array([tc, tm, tp])*cpughz*1e9/n/n/n/2.0
+    print('cycles per flop for n = ', nlist[-1])
+    print('cgs = '.rjust(30), cycles[-1,0])
+    print('mgs = '.rjust(30), cycles[-1,1])
+    print('numpy qr = '.rjust(30), cycles[-1,2])
     plt.plot(nlist, cycles[:,0], ':ok')
     plt.plot(nlist, cycles[:,1], '--ok')
     plt.plot(nlist, cycles[:,2], '-ok')
@@ -97,9 +102,9 @@ def test_cgs(m = 100, n = 50):
     A = np.random.randn(m, n)
     Q, R = cgs(A)
     QR = np.dot(Q, R)
-    print('error in A = ', np.linalg.norm(A-QR))
+    print('error in A = '.rjust(30), np.linalg.norm(A-QR))
     diff = np.eye(n) - np.dot(Q.T, Q)
-    print('error in Q = ', np.linalg.norm(diff))
+    print('error in Q = '.rjust(30), np.linalg.norm(diff))
 
 def test_mgs(m = 100, n = 50):
     A = np.random.randn(m, n)
@@ -110,7 +115,53 @@ def test_mgs(m = 100, n = 50):
     print('error in Q = ', np.linalg.norm(diff))
 
 if __name__ == '__main__':
-    #test_cgs(1000, 500)
-    #test_mgs(1000, 500)
-    #mgsvscgs(100);
-    time_plot(1000)
+    import textwrap, argparse
+    description = textwrap.dedent(
+    """
+    mgs vs cgs for qr: accuracy, timing, testing
+    """)
+    parser = argparse.ArgumentParser(description=description, 
+                                     prefix_chars = '+')
+    parser.add_argument('+test',
+                        action = 'store_true',
+                        default = False,
+                        help = 'test cgs and mgs')
+    parser.add_argument('+time',
+                        action = 'store_true',
+                        default = False,
+                        help = 'time cgs and mgs vs numpy qr')
+    parser.add_argument('+ni',
+                        type = int,
+                        default = 100,
+                        help = 'init n for timing')
+    parser.add_argument('+dn',
+                        type = int,
+                        default = 100,
+                        help = 'increment in n for timing')
+    
+    parser.add_argument('+accuracy',
+                        action = 'store_true',
+                        default = False,
+                        help = 'compare accuracy of mgs and cgs')
+    parser.add_argument('+cpughz',
+                        type = float,
+                        default = 3.3,
+                        help = 'clock speed of cpu in gigahertz')
+    parser.add_argument('n', 
+                        type = int,
+                        help = 'n for testing/accuracy, final n for timing')
+    args = parser.parse_args()
+    
+    if args.test:
+        print('testing cgs ...')
+        test_cgs(m = args.n, n = args.n)
+        print('testing mgs ...')
+        test_mgs(m = args.n, n = args.n)
+        
+    if args.time:
+        assert args.n > args.ni and args.n - args.ni > args.dn
+        time_plot(args.ni, args.dn, args.n, args.cpughz)
+
+    if args.accuracy:
+        mgsvscgs(n = args.n)
+        
