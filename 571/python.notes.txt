@@ -12,4 +12,7 @@
 12. file i/o
 13. very good of system activities
 14. almost everything, except str, int, float, are passed as pointers
-15. plotting using matplotlib
+15. matrix constructors in numpy
+16. aliasing of np arrays, everything is a pointer
+17. np array dtype, ndim, shape
+18. making plots with matplotlib

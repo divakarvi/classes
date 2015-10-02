@@ -133,11 +133,11 @@ if __name__ == '__main__':
     parser.add_argument('+ni',
                         type = int,
                         default = 100,
-                        help = 'init n for timing')
+                        help = 'init n for timing (default 100)')
     parser.add_argument('+dn',
                         type = int,
                         default = 100,
-                        help = 'increment in n for timing')
+                        help = 'increment in n for timing (default 100)')
     
     parser.add_argument('+accuracy',
                         action = 'store_true',
@@ -146,7 +146,7 @@ if __name__ == '__main__':
     parser.add_argument('+cpughz',
                         type = float,
                         default = 3.3,
-                        help = 'clock speed of cpu in gigahertz')
+                        help = 'clock speed of cpu in gigahertz (default 3.3)')
     parser.add_argument('n', 
                         type = int,
                         help = 'n for testing/accuracy, final n for timing')
