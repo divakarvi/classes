@@ -118,18 +118,18 @@ if __name__ == '__main__':
     import textwrap, argparse
     description = textwrap.dedent(
     """
-    mgs vs cgs for qr: accuracy, timing, testing
+    mgs vs cgs for qr, accuracy, timing, testing
     """)
     parser = argparse.ArgumentParser(description=description, 
                                      prefix_chars = '+')
     parser.add_argument('+test',
                         action = 'store_true',
                         default = False,
-                        help = 'test cgs and mgs')
+                        help = 'test cgs and mgs (default false)')
     parser.add_argument('+time',
                         action = 'store_true',
                         default = False,
-                        help = 'time cgs and mgs vs numpy qr')
+                        help = 'time cgs and mgs vs numpy qr (default false)')
     parser.add_argument('+ni',
                         type = int,
                         default = 100,

@@ -1,3 +1,4 @@
+Read python tutorial by van Rossum and Drake for more.
 1. Downloading anaconda3
 2. Installing python 3 in /usr/local/
 3. setting up .pythonrc
