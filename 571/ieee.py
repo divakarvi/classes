@@ -18,7 +18,7 @@ def dblformat(num):
     print('  exponent bits = ', s[1:12])
     print(' precision bits = ', s[12:])
     print(' exponent value = ', int(s[1:12], 2))
-    print('  effective exp = ', int(s[1:12],2)-1023)
+    print('  effective exp = ', int(s[1:12],2)-1022)
 
 def stdd1(x):
     assert isinstance(x, np.ndarray) and isinstance(x[0], float)
