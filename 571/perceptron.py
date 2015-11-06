@@ -108,19 +108,21 @@ def rosen(xx, y, maxiter = 10, tol = 0.1):
         niter += 1
     return w
 
-def x2y(x, w):
-    """
-    w is x**2, xy, y**2, x, y, 1
-    """
-    a = w[2]
-    b = w[1]*x + w[4]
-    c = w[0]*x**2 + w[3]*x + w[5]
-    if b*b - 4*a*c < 0:
-        return None
-    else:
-        return np.roots([a,b,c]).real
 
 def graphw(w, xmin = -5.0, xmax = 5.0):
+
+    def x2y(x, w):
+        """
+        w is x**2, xy, y**2, x, y, 1
+        """
+        a = w[2]
+        b = w[1]*x + w[4]
+        c = w[0]*x**2 + w[3]*x + w[5]
+        if b*b - 4*a*c < 0:
+            return None
+        else:
+            return np.roots([a,b,c]).real
+
     xarr = np.linspace(xmin, xmax, 1000)
     xs = []
     ys = []
