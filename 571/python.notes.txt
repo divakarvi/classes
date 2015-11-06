@@ -11,8 +11,8 @@ Read python tutorial by van Rossum and Drake for more.
 10. default arguments
 11. dictionaries
 12. file i/o
-13. very good of system activities
-14. almost everything, except str, int, float, are passed as pointers
+13. very good for system activities
+14. almost everything is passed as a pointer
 15. matrix constructors in numpy
 16. aliasing of np arrays, everything is a pointer
 17. np array dtype, ndim, shape
