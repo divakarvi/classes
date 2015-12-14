@@ -11,11 +11,13 @@ def init():
     """
     global tri_copy
     if os.path.isabs(__file__):
+        print('abs path name')
         i = __file__.find(r'/__init__.py')
         fname = os.path.join(__file__[:i], 'tri_copy.so')
         print('loading ... ', fname)
     else:
-        i = __file__.find(r'/__init__.py')
+        i = __file__.find(r'__init__.py')
+        print('not abs path name')
         fname = os.path.join(os.path.abspath('.'),__file__[:i], 'tri_copy.so')
         print('loading ... ', fname)
     triso = ctypes.cdll.LoadLibrary(fname)

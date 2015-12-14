@@ -5,7 +5,7 @@
 
 int main(){
 	double a[n] = {1, 2, 3, 4};
-	double *b = (double *)malloc(10*sizeof(double)); 
+	double *b = (double *)malloc(n*(n+1)/2*sizeof(double)); 
 	tri_copy(a, n, b);
 	
 	printf("a = ");

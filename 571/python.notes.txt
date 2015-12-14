@@ -17,3 +17,6 @@ Read python tutorial by van Rossum and Drake for more.
 16. aliasing of np arrays, everything is a pointer
 17. np array dtype, ndim, shape
 18. making plots with matplotlib
+
+For more about Makefiles and shared object libraries, go to
+https://dl.dropboxusercontent.com/u/122994360/spca/spca.html
