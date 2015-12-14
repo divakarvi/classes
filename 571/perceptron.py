@@ -138,7 +138,7 @@ def graphw(w, xmin = -5.0, xmax = 5.0):
 if __name__ == '__main__':
     e = Ellipse(axes = (3.0,2.0), center = (1.0, 1.0))
     e.plot()
-    x, y = e.samples(1000, 0.02)
+    x, y = e.samples(10000, 0.2)
     xx = e.featurize(x)
     w = rosen(xx, y, maxiter = 10, tol = 0.01)
     graphw(w, xmin = -10.0, xmax = 10.0)
