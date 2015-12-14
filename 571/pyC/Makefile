@@ -6,3 +6,5 @@ test.exe: tri_test.o tri_copy.o
 	gcc -o $@ $^
 tri_copy.so: tri_copy.o
 	gcc -shared tri_copy.o -o tri_copy.so
+clean:
+	rm *.o; rm *.so
