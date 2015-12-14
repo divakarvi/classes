@@ -5,7 +5,7 @@
 
 int main(){
 	double a[n] = {1, 2, 3, 4};
-	double *b = (double *)malloc(n*(n+1)/2*sizeof(double)); 
+	double b[n*(n+1)/2]; 
 	tri_copy(a, n, b);
 	
 	printf("a = ");
@@ -21,6 +21,4 @@ int main(){
 			printf(", ");
 	}
 	printf("\n");
-
-	free(b);
 }
